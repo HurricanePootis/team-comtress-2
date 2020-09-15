@@ -73,7 +73,7 @@ us single bullet fire weapons.
 ### Building on Linux
 
 0. Make sure you have your distro's build essentials, gcc and g++ multilibs installed. This will vary from distro to distro, so I can't include everything here.
-1. Run `git clone https://github.com/gperftools/gperftools.git -b gperftools-2.0 thirdparty/gperftools-2.0`
+1. Run this from tc2 root `git clone https://github.com/gperftools/gperftools.git -b gperftools-2.0 thirdparty/gperftools-2.0`
 2. `cd` into `thirdparty/gperftools-2.0` and run`./autogen.sh`
 3. Run `./configure --enable-frame-pointers`
 4. Run `make -j$(nproc)`
