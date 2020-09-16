@@ -10,8 +10,7 @@ if [ ! -f ./thirdparty/gperftools-2.0/.libs/libtcmalloc_minimal.so ]; then
   aclocal
   automake --add-missing
 	autoconf
-	./configure --enable-frame-pointers --host=i386 "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
-#  sed -i 's/LIBTOOL = $(SHELL) $(top_builddir)\/libtool/LIBTOOL = libtool/' Makefile
+	./configure --enable-frame-pointers "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
   make -j$CORES
 	cd ../..
 fi
@@ -22,7 +21,7 @@ if [ ! -f ./thirdparty/protobuf-2.5.0/src/.libs/libprotobuf.a ]; then
   automake --add-missing
 	autoconf
 	chmod u+x autogen.sh
-	bash ./configure --host=i386 "CFLAGS=-m32 -D_GLIBCXX_USE_CXX11_ABI=0" "CXXFLAGS=-m32 -D_GLIBCXX_USE_CXX11_ABI=0" "LDFLAGS=-m32" --enable-shared=no
+	bash ./configure "CFLAGS=-m32 -D_GLIBCXX_USE_CXX11_ABI=0" "CXXFLAGS=-m32 -D_GLIBCXX_USE_CXX11_ABI=0" "LDFLAGS=-m32" --enable-shared=no
 	make -j$CORES
 	cd ../..
 fi
@@ -33,7 +32,7 @@ if [ ! -f ./thirdparty/libedit-3.1/src/.libs/libedit.so ]; then
   automake --add-missing
 	autoconf
 	chmod u+x ./configure
-	bash ./configure --host=i386 "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
+	bash ./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
 	make -j$CORES
 	cd ../..
 fi
@@ -44,7 +43,7 @@ fi
 
 export VALVE_NO_AUTO_P4=1
 if [[ $1 == '-v' ]]; then
-  make -f games.mak NO_CHROOT=1 MAKE_JOBS=1 MAKE_VERBOSE=1 "${@:2}"
+  make NO_CHROOT=1 MAKE_JOBS=1 MAKE_VERBOSE=1 -f games.mak "${@:2}"
 else
-  make -f games.mak NO_CHROOT=1 MAKE_JOBS=$CORES "$@"
+  make NO_CHROOT=1 MAKE_JOBS=$CORES -f games.mak "${@:1}"
 fi
