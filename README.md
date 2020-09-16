@@ -86,7 +86,7 @@ Dependencies (libraries must be 32-bit):
 - openal
 - libncurses
 
-1. Run `build.sh` repeatedly until it compiles fully.
+1. Run `build.sh` **repeatedly** until it compiles fully.
 
 ### Running and Debugging
 1. For the compiled binaries to run, you will need to copy your current TF2 installation to `../game` (relative to your repostiory, outside of it).
