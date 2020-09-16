@@ -37,6 +37,13 @@ if [ ! -f ./thirdparty/libedit-3.1/src/.libs/libedit.so ]; then
 	cd ../..
 fi
 
+if [ ! -f ./devtools/bin/vpc2_linux ]; then
+	cd ./thirdparty/vpc2
+	make -j$CORES
+	mv ./utils/vpc/obj/Linux/release/vpc ../../devtools/bin/vpc2_linux
+	cd ../..
+fi
+
 if [ ! -f ./games.mak ]; then
 	bash ./creategameprojects.sh
 fi
