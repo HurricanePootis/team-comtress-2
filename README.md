@@ -72,6 +72,20 @@ us single bullet fire weapons.
 
 ### Building on Linux
 
+Dependencies (libraries must be 32-bit):
+- make
+- libunwind
+- GCC
+- glibc
+- automake
+- autoconf
+- freetype
+- fontconfig
+- libGL
+- libX11
+- openal
+- libncurses
+
 0. Make sure you have your distro's build essentials, gcc and g++ multilibs installed. On arch I used the command `sudo pacman -Syu lib32-gcc-libs gcc-libs`. For Ubuntu, according to the Valve Wiki for Source SDK 2013, do `sudo apt-get install build-essential` and `sudo apt-get install gcc-multilib g++-multilib`
 1. Compile `gperftools`
 
@@ -111,27 +125,6 @@ Other launch options to consider:
 - `sw` to force windowed mode
 - `-w WIDTH -h HEIGHT` to set the resolution
 - `+map MAPNAME` to automatically launch a map on startup
-
-## Linux Build
-Dependencies (libraries must be i686):
-- `make`
-- GCC
-- automake
-- autoconf
-
-- `libunwind`
-- glibc
-- freetype
-- fontconfig
-- libGL
-- libX11
-- openal
-- libncurses
-- curl with GNUTLS support
-
-Instructions:
-1. Prepare for unforseen consequences
-1. Run `./magic.sh -f`
 
 ## Legal
 
