@@ -4,9 +4,7 @@ set -e  # Stop on error
 CORES=`nproc`
 if [ ! -f ./thirdparty/gperftools-2.0/built ]; then
 	cd ./thirdparty/gperftools-2.0
-	aclocal
-	automake --add-missing
-	autoconf
+	bash ./autogen.sh
 	./configure --enable-frame-pointers --host=i686-unknown-linux-gnu "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
 	make -j$CORES
 	cd ../..
@@ -15,10 +13,7 @@ fi
 
 if [ ! -f ./thirdparty/protobuf-2.5.0/built ]; then
 	cd ./thirdparty/protobuf-2.5.0
-  aclocal
-	automake --add-missing
-	autoconf
-	chmod u+x autogen.sh
+	bash ./autogen.sh
 	bash ./configure --host=i686-unknown-linux-gnu "CFLAGS=-m32 -D_GLIBCXX_USE_CXX11_ABI=0" "CXXFLAGS=-m32 -D_GLIBCXX_USE_CXX11_ABI=0" "LDFLAGS=-m32" --enable-shared=no
 	make -j$CORES
 	cd ../..
@@ -27,8 +22,6 @@ fi
 
 if [ ! -f ./thirdparty/libedit-3.1/built ]; then
 	cd ./thirdparty/libedit-3.1
-	aclocal
-	automake --add-missing
 	autoconf
 	chmod u+x ./configure
 	bash ./configure --host=i686-unknown-linux-gnu "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
@@ -36,8 +29,6 @@ if [ ! -f ./thirdparty/libedit-3.1/built ]; then
 	cd ../..
 	touch ./thirdparty/libedit-3.1/built
 fi
-
-exit
 
 if [ ! -f ./games.mak ]; then
 	bash ./creategameprojects.sh
