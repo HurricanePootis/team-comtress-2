@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e	# Stop on error
 
-if [[ ! -v CORES ]]; then
-	CORES=`nproc`
+if [ ! -v CORES ]; then
+	CORES=$(nproc)
 fi
 
 if [ ! -f ./thirdparty/gperftools-2.0/.libs/libtcmalloc_minimal.so ]; then
@@ -11,7 +11,7 @@ if [ ! -f ./thirdparty/gperftools-2.0/.libs/libtcmalloc_minimal.so ]; then
 	automake --add-missing
 	autoconf
 	./configure --enable-frame-pointers "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
-	make -j$CORES
+	make "-j$CORES"
 	cd ../..
 fi
 
@@ -22,8 +22,8 @@ if [ ! -f ./thirdparty/protobuf-2.5.0/src/.libs/libprotobuf.a ]; then
 	autoconf
 	chmod u+x autogen.sh
 	./configure "CFLAGS=-m32 -D_GLIBCXX_USE_CXX11_ABI=0" "CXXFLAGS=-m32 -D_GLIBCXX_USE_CXX11_ABI=0" "LDFLAGS=-m32" --enable-shared=no
-	make -j$CORES
-	cd ../..
+	make "-j$CORES"
+cd ../..
 fi
 
 if [ ! -f ./thirdparty/libedit-3.1/src/.libs/libedit.so ]; then
@@ -33,24 +33,35 @@ if [ ! -f ./thirdparty/libedit-3.1/src/.libs/libedit.so ]; then
 	autoconf
 	chmod u+x ./configure
 	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
-	make -j$CORES
+	make "-j$CORES"
 	cd ../..
 fi
 
 if [ ! -f ./devtools/bin/vpc2_linux ]; then
 	cd ./thirdparty/vpc2
-	make -j$CORES
-	mv ./utils/vpc/obj/Linux/release/vpc ../../devtools/bin/vpc2_linux
+	make "-j$CORES"
+mv ./utils/vpc/obj/Linux/release/vpc ../../devtools/bin/vpc2_linux
 	cd ../..
 fi
 
-if [ ! -f ./games.mak ]; then
+if [ ! -f ./games_dev.mak ] && [ "$*" == '-d' ]; then
+	./creategameprojects_dev.sh
+elif [ ! -f ./games.mak ]; then
 	./creategameprojects.sh
 fi
 
-export VALVE_NO_AUTO_P4=1
-if [[ $1 == '-v' ]]; then
-	make NO_CHROOT=1 MAKE_JOBS=1 MAKE_VERBOSE=1 -f games.mak "${@:2}"
+#MAKEARGS=()
+if [ "$*" == '-v' ] && [ "$*" == '-d' ]; then
+	MAKEARGS=("${@:3}")
+elif [ "$1" == '-v' ] || [ "$1" == '-d' ]; then
+	MAKEARGS=("${@:2}")
 else
-	make NO_CHROOT=1 MAKE_JOBS=$CORES -f games.mak "${@:1}"
+	MAKEARGS=("${@:1}")
+fi
+
+export VALVE_NO_AUTO_P4=1
+if [ "$*" == '-v' ]; then
+	make NO_CHROOT=1 MAKE_JOBS=1 MAKE_VERBOSE=1 -f games.mak "${MAKEARGS[@]}"
+else
+	make NO_CHROOT=1 MAKE_JOBS="$CORES" -f games.mak "${MAKEARGS[@]}"
 fi
