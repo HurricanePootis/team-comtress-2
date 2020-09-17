@@ -44,7 +44,7 @@ if [ ! -f ./devtools/bin/vpc2_linux ]; then
 	cd ../..
 fi
 
-if [ ! -f ./games.mak ]; then
+if [ ! -f ./games_dev.mak ]; then
 	./creategameprojects_dev.sh
 fi
 
