@@ -89,6 +89,7 @@ Dependencies (libraries must be 32-bit):
 
 1. Run `build.sh` **repeatedly** until it compiles fully.
 2. Or, run `build.sh -d` **repeatedely** to compile with `/nofpo` as a vpc option for debugging purposes.
+3. Make sure all of your tf2 content is in the `game` folder (which is next to your team-comtress-2 folder), and run `./run.sh` to launc the game.
 
 ### Running and Debugging
 1. For the compiled binaries to run, you will need to copy your current TF2 installation to `../game` (relative to your repostiory, outside of it).
