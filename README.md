@@ -85,6 +85,7 @@ Dependencies (libraries must be 32-bit):
 - libX11
 - openal
 - libncurses
+- libcurl-gnutls
 
 1. Run `build.sh` **repeatedly** until it compiles fully.
 
