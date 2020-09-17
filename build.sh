@@ -32,7 +32,7 @@ if [ ! -f ./thirdparty/libedit-3.1/src/.libs/libedit.so ]; then
   automake --add-missing
 	autoconf
 	chmod u+x ./configure
-	bash ./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
+	./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
 	make -j$CORES
 	cd ../..
 fi
@@ -45,7 +45,7 @@ if [ ! -f ./devtools/bin/vpc2_linux ]; then
 fi
 
 if [ ! -f ./games.mak ]; then
-	bash ./creategameprojects.sh
+	./creategameprojects.sh
 fi
 
 export VALVE_NO_AUTO_P4=1
