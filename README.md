@@ -88,7 +88,7 @@ Dependencies (libraries must be 32-bit):
 - libcurl-gnutls
 
 1. Run `build.sh` **repeatedly** until it compiles fully.
-2. Or, run `devbuild.sh` **repeatedely** to compile with `/nofpo` as a vpc option for debugging purposes.
+2. Or, run `build.sh -d` **repeatedely** to compile with `/nofpo` as a vpc option for debugging purposes.
 
 ### Running and Debugging
 1. For the compiled binaries to run, you will need to copy your current TF2 installation to `../game` (relative to your repostiory, outside of it).
