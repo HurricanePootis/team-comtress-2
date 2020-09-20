@@ -70,7 +70,7 @@ us single bullet fire weapons.
 9. Build the VS project
 10. The executables are placed at `../game/hl2.exe` for the client and at `../game/srcds.exe` for the server. Note: this path is outside the repository.
 
-### Building on Linux
+### Building on GNU/Linux
 
 Dependencies (libraries must be 32-bit):
 - make
@@ -79,6 +79,7 @@ Dependencies (libraries must be 32-bit):
 - glibc
 - automake
 - autoconf
+- m4
 - freetype
 - fontconfig
 - libGL
