@@ -13,6 +13,10 @@ if [ ! -v CORES ]; then
 	CORES=$(nproc)
 fi
 
+if [ ! -f ./tools/runtime/steamrt_scout_amd64.tar.xz ]; then
+	./download_libs_linux.sh
+fi
+
 if [ ! -f ./thirdparty/gperftools-2.0/.libs/libtcmalloc_minimal.so ]; then
 	cd ./thirdparty/gperftools-2.0
 	aclocal
