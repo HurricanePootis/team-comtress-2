@@ -47,7 +47,7 @@
 //---------------------------------------------------------------------
 // Load/store quaternions
 //---------------------------------------------------------------------
-#if 0
+#if 1
 #if ALLOW_SIMD_QUATERNION_MATH
 // Using STDC or SSE
 FORCEINLINE fltx4 LoadAlignedSIMD( const QuaternionAligned & pSIMD )
@@ -292,7 +292,7 @@ FORCEINLINE fltx4 QuaternionScaleSIMD( const fltx4 &p, float t )
 //-----------------------------------------------------------------------------
 // Quaternion sphereical linear interpolation
 //-----------------------------------------------------------------------------
-#if 0
+#if 1
 
 // SSE and STDC
 FORCEINLINE fltx4 QuaternionSlerpNoAlignSIMD( const fltx4 &p, const fltx4 &q, float t )
