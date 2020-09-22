@@ -35,6 +35,8 @@ obj*/
 devtools/bin/vpc_linux
 external/vpc/utils/vpc/obj
 lib/public/linux32/*.so
+lib/public/linux32/*.a
+
 
 # Linux libs
 thirdparty/gperftools-2.0/.libs/
