@@ -673,11 +673,6 @@ bool CThreadEvent::Wait( uint32 dwTimeout )
 	return CThreadSyncObject::Wait( dwTimeout );
 }
 
-void CThreadEvent::AddListener(std::shared_ptr<std::condition_variable_any> condition)
-{
-	m_listeningConditions.PushItem(condition);
-}
-
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------

@@ -1054,7 +1054,10 @@ public:
 
 	bool Wait( uint32 dwTimeout = TT_INFINITE );
 
-	void AddListener(std::shared_ptr<std::condition_variable_any> condition);
+	void AddListener(std::shared_ptr<std::condition_variable_any> condition)
+	{
+		m_listeningConditions.PushItem(condition);
+	}
 
 private:
 	CThreadEvent( const CThreadEvent & ) = delete;
