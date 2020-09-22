@@ -6,3 +6,4 @@ for lib in "${libs[@]}"
 do
   curl "${server}${lib}" -o "${lib}"
 done
+
