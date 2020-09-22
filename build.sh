@@ -9,7 +9,7 @@ if pwd | grep -q " "; then
 	exit 1
 fi
 
-if [ ! -v CORES ]; then
+if [ -z "$CORES" ]; then
 	CORES=$(nproc)
 fi
 
