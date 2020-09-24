@@ -89,6 +89,3 @@ case "$*" in
 		CFLAGS="-w" CXXFLAGS="-w" make NO_CHROOT=1 STEAM_RUNTIME_PATH='' MAKE_JOBS="$CORES" -f games.mak "$MAKEARGS"
 		;;
 esac
-
-cp game_clean/copy/bin/*.so ../game/bin/
-cp -r game_clean/copy/tf/custom/* ../game/tf/custom/
