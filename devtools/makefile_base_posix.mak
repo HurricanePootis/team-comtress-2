@@ -247,7 +247,7 @@ VSIGN ?= true
 
 ifeq ($(TARGET_PLATFORM),linux32)
 	# FIXME(maximsmol): linux can't link stripped .ar archives apparently
-	STRIP="true"
+	STRIP=""
 endif
 
 ifeq ($(SOURCE_SDK), 1)
