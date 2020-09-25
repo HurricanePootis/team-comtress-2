@@ -85,25 +85,9 @@ Other launch options to consider:
 - `+map MAPNAME` to automatically launch a map on startup
 
 ## Linux Build
-Dependencies (libraries must be i686):
-- `make`
-- GCC
-- automake
-- autoconf
-- m4
-- `libunwind`
-- glibc
-- freetype
-- fontconfig
-- libGL
-- libX11
-- openal
-- libncurses
-- curl with GNUTLS support
 
-Instructions:
-1. Prepare for unforseen consequences
-1. Run `./magic.sh -f`
+Instructions are on the wiki.
+
 
 ## Legal
 
