@@ -70,7 +70,7 @@ case "$1" in
 		;;
 esac
 
-if [ "$*" = '-c' ]; then
+if echo "$*" | grep -q -- "-c"; then
 	MAKEARGS="clean"
 else
 	MAKEARGS="all"
