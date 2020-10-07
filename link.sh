@@ -38,12 +38,9 @@ link_dir tf/scripts
 
 link_glob bin ''
 link_glob tf '.vpk'
-link_glob tf '.cache'   # IDK why we need this, but we crash on CAudioSourceMemWave (...): GetDataPointer() without it
 
 copy tf/cfg
-#copy tf/gameinfo.txt
 copy tf/gamestate.txt
-#copy tf/steam.inf   # This will need to be copied from game_clean once merged into master
 copy tf/glshaders.cfg
 copy tf/videoconfig_linux.cfg
 
