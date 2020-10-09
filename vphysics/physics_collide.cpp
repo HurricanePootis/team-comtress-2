@@ -1183,7 +1183,8 @@ CPhysCollide *CPhysicsCollision::ConvertConvexToCollideParams( CPhysConvex **pCo
 	if ( validConvex )
 	{
 		IVP_Template_Surbuild_LedgeSoup params;
-		params.force_convex_hull = (IVP_Compact_Ledge *)convertParams.pForcedOuterHull;
+		// todo(melvyn2) implement force_convex_hull
+//		params.force_convex_hull = (IVP_Compact_Ledge *)convertParams.pForcedOuterHull;
 		params.build_root_convex_hull = convertParams.buildOuterConvexHull ? IVP_TRUE : IVP_FALSE;
 
 		// NOTE: THIS FREES THE LEDGES in pConvex!!!
