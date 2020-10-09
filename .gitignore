@@ -19,6 +19,9 @@ ipch
 
 *.lib
 *.a
+*.la
+*.o
+*.lo
 *.obj
 *.dylib
 *.xz
@@ -30,8 +33,10 @@ ipch
 obj*/
 !devtools/*.mak
 !utils/smdlexp/smdlexp.mak
+*.project
+devtools/bin/vpc_linux
+external/vpc/utils/vpc/obj
 
-# Specific Source build products
 client.pdb
 client.dll
 client.lib
@@ -62,7 +67,6 @@ config.cfg
 # required upgraded/modified protobuf projects
 !thirdparty/protobuf-2.5.0/vsprojects/*.vcxproj
 *.iobj
-*.pch
 *.pdb
 *.ipdb
 *.dbg
@@ -82,6 +86,7 @@ UpgradeLog*.htm
 # third party build products
 thirdparty/protobuf-2.5.0/src/Makefile.in
 thirdparty/protobuf-2.5.0/protobuf.pc
+thirdparty/protobuf-2.5.0/autom4te.cache
 thirdparty/protobuf-2.5.0/compile
 thirdparty/protobuf-2.5.0/stamp-h1
 thirdparty/protobuf-2.5.0/Makefile
@@ -89,10 +94,71 @@ thirdparty/protobuf-2.5.0/Makefile.in
 thirdparty/protobuf-2.5.0/libtool
 thirdparty/protobuf-2.5.0/config.log
 thirdparty/protobuf-2.5.0/protobuf-lite.pc
+thirdparty/protobuf-2.5.0/aclocal.m4
+thirdparty/protobuf-2.5.0/gtest/configure
 thirdparty/protobuf-2.5.0/configure
-thirdparty/protobuf-2.5.0/config.status
+thirdparty/protobuf-2.5.0/src/protoc
+thirdparty/protobuf-2.5.0/src/unittest_proto_middleman
+thirdparty/protobuf-2.5.0/**/Makefile
+thirdparty/protobuf-2.5.0/**/Makefile.in
+thirdparty/protobuf-2.5.0/**/libtool
+thirdparty/protobuf-2.5.0/**/.dirstamp
+thirdparty/protobuf-2.5.0/gtest/config.status
+thirdparty/protobuf-2.5.0/gtest/scripts/gtest-config
+thirdparty/protobuf-2.5.0/gtest/build-aux/config.h
+thirdparty/protobuf-2.5.0/**/stamp-h1
 thirdparty/protobuf-2.5.0/config.h
+thirdparty/protobuf-2.5.0/config.status
 thirdparty/protobuf-2.5.0/test-driver
-
+thirdparty/protobuf-2.5.0/missing
+thirdparty/protobuf-2.5.0/**/.deps
+thirdparty/protobuf-2.5.0/**/.libs
+thirdparty/protobuf-2.5.0/src/google/protobuf/compiler/cpp/cpp_test_bad_identifiers.pb.*
+thirdparty/protobuf-2.5.0/src/google/protobuf/unittest*.pb.*
+thirdparty/protobuf-2.5.0/src/google/protobuf/.deps/
+thirdparty/protobuf-2.5.0/src/google/protobuf/.dirstamp
+thirdparty/protobuf-2.5.0/src/google/protobuf/.libs/
 # ignore generated protobufs
 generated_proto*/
+
+thirdparty/gperftools-2.0/.deps
+thirdparty/gperftools-2.0/.libs
+thirdparty/gperftools-2.0/src/config.h
+thirdparty/gperftools-2.0/aclocal.m4
+thirdparty/gperftools-2.0/autom4te.cache
+thirdparty/gperftools-2.0/configure
+thirdparty/gperftools-2.0/config.guess
+thirdparty/gperftools-2.0/config.log
+thirdparty/gperftools-2.0/compile
+thirdparty/gperftools-2.0/config.status
+thirdparty/gperftools-2.0/config.sub
+thirdparty/gperftools-2.0/depcomp
+thirdparty/gperftools-2.0/Makefile
+thirdparty/gperftools-2.0/libtool
+thirdparty/gperftools-2.0/test-driver
+thirdparty/gperftools-2.0/missing
+thirdparty/gperftools-2.0/Makefile.in
+thirdparty/gperftools-2.0/install-sh
+thirdparty/gperftools-2.0/**/*.o
+thirdparty/gperftools-2.0/**/*.la
+thirdparty/gperftools-2.0/**/*.lo
+thirdparty/gperftools-2.0/**/*.pc
+thirdparty/gperftools-2.0/src/gperftools/tcmalloc.h
+
+thirdparty/libedit-3.1/missing
+thirdparty/libedit-3.1/**/Makefile
+thirdparty/libedit-3.1/**/Makefile.in
+thirdparty/libedit-3.1/**/libtool
+thirdparty/libedit-3.1/config.status
+thirdparty/libedit-3.1/config.guess
+thirdparty/libedit-3.1/config.sub
+thirdparty/libedit-3.1/config.h
+thirdparty/libedit-3.1/depcomp
+thirdparty/libedit-3.1/install-sh
+thirdparty/libedit-3.1/configure
+thirdparty/libedit-3.1/compile
+thirdparty/libedit-3.1/libedit.pc
+thirdparty/libedit-3.1/aclocal.m4
+thirdparty/libedit-3.1/examples/wtc1
+thirdparty/libedit-3.1/examples/fileman
+thirdparty/libedit-3.1/examples/tc1
