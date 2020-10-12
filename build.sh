@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e	# Stop on error
 cd "$(dirname "$0")"
 
@@ -9,28 +9,71 @@ if pwd | grep -q " "; then
 	exit 1
 fi
 
-: "${CORES:=$(nproc)}"
+# Defaults
+CF_SUPPRESSION="-w"
+MAKE_SRT="NO_CHROOT=1 STEAM_RUNTIME_PATH=''"
+MAKE_CFG="CFG=release"
+MAKE_VERBOSE=''
+VPC_FLAGS="/define:LTCG /define:CERT"
+CORES=$(nproc)
 
-if [ ! -f ./thirdparty/gperftools-2.0/.libs/libtcmalloc_minimal.so ]; then
+while [[ ${1:0:1} == '-' ]]; do
+	case "${1}" in
+		"-v")
+			CF_SUPPRESSION=""
+		;;
+		"-vv")
+			CF_SUPPRESSION=""
+			MAKE_VERBOSE=1
+		;;
+		"-d")
+			VPC_FLAGS="/no_ceg /nofpo"
+		;;
+		"-dd")
+			VPC_FLAGS="/no_ceg /nofpo"
+			MAKE_CFG="CFG=debug"
+		;;
+		"-c")
+			shift
+			if [[ $1 == ?(-)+([[:digit:]]) ]]; then
+				CORES=$1
+			else
+				echo "Not a number: ${1}"
+				exit 1
+			fi
+		;;
+		"-r")
+			MAKE_SRT=''
+		;;
+		*)
+			echo "Unknown flag ${1}"
+			exit 1
+		;;
+	esac
+	shift
+done
+
+if [[ ! -f ./thirdparty/gperftools-2.0/.libs/libtcmalloc_minimal.so ]]; then
 	cd ./thirdparty/gperftools-2.0
 	aclocal
 	automake --add-missing
 	autoconf
 	chmod u+x configure
-	./configure --enable-frame-pointers "CFLAGS=-m32 -w" "CXXFLAGS=-m32 -w" "LDFLAGS=-m32"
+	./configure --enable-frame-pointers "CFLAGS=-m32 ${CF_SUPPRESSION}" "CXXFLAGS=-m32 ${CF_SUPPRESSION}" "LDFLAGS=-m32"
 	make "-j$CORES"
 	cd ../..
 fi
 
-if [ ! -f ./thirdparty/protobuf-2.5.0/src/.libs/libprotobuf.a ]; then
+if [[ ! -f ./thirdparty/protobuf-2.5.0/src/.libs/libprotobuf.a ]]; then
 	cd ./thirdparty/protobuf-2.5.0
 	aclocal
 	automake --add-missing
 	autoconf
 	chmod u+x configure
-	./configure "CFLAGS=-m32 -w -D_GLIBCXX_USE_CXX11_ABI=0" "CXXFLAGS=-m32 -w -D_GLIBCXX_USE_CXX11_ABI=0" "LDFLAGS=-m32" --enable-shared=no
+	./configure "CFLAGS=-m32 ${CF_SUPPRESSION} -D_GLIBCXX_USE_CXX11_ABI=0" \
+		"CXXFLAGS=-m32 ${CF_SUPPRESSION} -D_GLIBCXX_USE_CXX11_ABI=0" "LDFLAGS=-m32" --enable-shared=no
 	make "-j$CORES"
-cd ../..
+	cd ../..
 fi
 
 if [ ! -f ./thirdparty/libedit-3.1/src/.libs/libedit.so ]; then
@@ -39,7 +82,7 @@ if [ ! -f ./thirdparty/libedit-3.1/src/.libs/libedit.so ]; then
 	automake --add-missing
 	autoconf
 	chmod u+x ./configure
-	./configure "CFLAGS=-m32 -w" "CXXFLAGS=-m32 -w" "LDFLAGS=-m32"
+	./configure "CFLAGS=-m32 ${CF_SUPPRESSION}" "CXXFLAGS=-m32 ${CF_SUPPRESSION}" "LDFLAGS=-m32"
 	make "-j$CORES"
 	cd ../..
 fi
@@ -50,42 +93,11 @@ if [ ! -f ./devtools/bin/vpc_linux ]; then
 	cd ../../../..
 fi
 
-case "$1" in
-	-dd)
-		echo "-------------------------------------------------"
-		echo "                    WARNING"
-		echo "    You are probably about to waste your time"
-		echo "        Debug builds currently don't work"
-		echo "    You'll probably get an error about vphysics"
-		echo "-------------------------------------------------"
-		sleep 2
-
-		./creategameprojects_debug.sh
-		;;
-	-d)
-		./creategameprojects_dev.sh
-		;;
-	*)
-		./creategameprojects.sh
-		;;
-esac
-
-if echo "$*" | grep -q -- "-c"; then
-	MAKEARGS="clean"
-else
-	MAKEARGS="all"
-fi
+# shellcheck disable=SC2086   # we want arguments to be split
+devtools/bin/vpc /define:WORKSHOP_IMPORT_DISABLE /define:SIXENSE_DISABLE /define:NO_X360_XDK \
+				/define:RAD_TELEMETRY_DISABLED /define:DISABLE_ETW /retail /tf ${VPC_FLAGS} +game /mksln games
 
 export VALVE_NO_AUTO_P4=1
 
-case "$*" in
-	-vv)
-		make NO_CHROOT=1 STEAM_RUNTIME_PATH='' MAKE_JOBS=1 MAKE_VERBOSE=1 -f games.mak "$MAKEARGS"
-		;;
-	-v)
-		make NO_CHROOT=1 STEAM_RUNTIME_PATH='' MAKE_JOBS=1 -f games.mak "$MAKEARGS"
-		;;
-	*)
-		CFLAGS="-w" CXXFLAGS="-w" make NO_CHROOT=1 STEAM_RUNTIME_PATH='' MAKE_JOBS="$CORES" -f games.mak "$MAKEARGS"
-		;;
-esac
+CFLAGS="${CF_SUPPRESSION}" CXXFLAGS="${CF_SUPPRESSION}" make ${MAKE_SRT} MAKE_VERBOSE="${MAKE_VERBOSE}" ${MAKE_CFG} \
+		MAKE_JOBS="$CORES" -f games.mak "$@"
