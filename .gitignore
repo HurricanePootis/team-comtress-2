@@ -162,3 +162,5 @@ thirdparty/libedit-3.1/aclocal.m4
 thirdparty/libedit-3.1/examples/wtc1
 thirdparty/libedit-3.1/examples/fileman
 thirdparty/libedit-3.1/examples/tc1
+
+thirdparty/libpng-1.5.2/pngtest
