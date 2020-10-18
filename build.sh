@@ -121,7 +121,7 @@ check_and_make ./external/vpc/utils/vpc ./devtools/bin/vpc_linux
 check_and_make ./thirdparty/libpng-1.5.2 ./lib/public/linux32/libpng.a "-f scripts/makefile.gcc"
 
 # shellcheck disable=SC2086   # we want arguments to be split
-devtools/bin/vpc /define:WORKSHOP_IMPORT_DISABLE /define:SIXENSE_DISABLE /define:NO_X360_XDK \
+devtools/bin/vpc_linux /define:WORKSHOP_IMPORT_DISABLE /define:SIXENSE_DISABLE /define:NO_X360_XDK \
 				/define:RAD_TELEMETRY_DISABLED /define:DISABLE_ETW /retail /tf ${VPC_FLAGS} +game /mksln games
 
 
