@@ -48,7 +48,7 @@ $Configuration	"Debug"
 
 	$Compiler [$WIN32]
 	{
-		$PrecompiledHeaderFile				"$SRCDIR\ivp\obj\x86_debug\hk_base.pch"
+		$PrecompiledHeaderFile				"$SRCDIR\ivp\obj\x86_debug\hk_base\hk_base.pch"
 		$ASMListLocation					"$SRCDIR\ivp\obj\x86_debug\hk_base\"
 		$ObjectFileName						"$SRCDIR\ivp\obj\x86_debug\hk_base\"
 		$ProgramDatabaseFileName			"$SRCDIR\ivp\obj\x86_debug\hk_base\"
