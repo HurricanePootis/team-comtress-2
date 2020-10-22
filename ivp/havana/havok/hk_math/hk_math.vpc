@@ -3,7 +3,6 @@
 //
 //	Project Script
 //-----------------------------------------------------------------------------
-// ***** AUTO-GENERATED: PLEASE FIXUP MANUALLY BEFORE USING THIS SCRIPT! *****
 
 $Macro SRCDIR		"..\..\..\.."
 $Macro OUTLIBDIR	"$LIBCOMMON"
