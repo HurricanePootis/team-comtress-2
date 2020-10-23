@@ -1540,7 +1540,7 @@ void CPhysicsEnvironment::Simulate( float deltaTime )
 	{
 		m_pSleepEvents->ProcessActiveObjects( m_pPhysEnv, m_pCollisionListener->GetHandler() );
 	}
-	visualize_collisions();
+	//visualize_collisions();
 	VirtualMeshPSI();
 	GetNextFrameTime();
 }
