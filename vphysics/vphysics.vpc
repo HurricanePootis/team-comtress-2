@@ -20,7 +20,6 @@ $Configuration
 		$PrecompiledHeaderFile			"$(IntDir)\vphysics.pch"
 		// Language
 		$EnableRunTimeTypeInfo			"No (/GR-)"
-		$GCC_ExtraCompilerFlags			"-fpermissive"
 	}
 	$Compiler [$WIN32]
 	{
