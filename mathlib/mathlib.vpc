@@ -13,6 +13,7 @@ $Configuration
 	{
 		$AdditionalIncludeDirectories	"$BASE;..\public\mathlib"
 		$PreprocessorDefinitions		"$BASE;MATHLIB_LIB"
+		$OptimizerLevel					"$BASE -fno-fast-math" [$POSIX]
 	}
 }
 
