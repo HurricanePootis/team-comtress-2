@@ -16,8 +16,6 @@ MAKE_CFG="CFG=release"
 MAKE_VERBOSE=""
 VPC_FLAGS="/define:LTCG /define:CERT"
 CORES=$(nproc)
-export CC=gcc
-export CXX=g++
 export VALVE_NO_AUTO_P4=1
 
 while [[ ${1:0:1} == '-' ]]; do
@@ -48,10 +46,6 @@ while [[ ${1:0:1} == '-' ]]; do
 		"-r")
 			MAKE_SRT_FLAGS="PATH=/bin:/usr/bin"
 			CHROOT_NAME="$(pwd | sed 's/\//_/g')_"  # Trailing _ is required
-			# shellcheck disable=SC2155
-			export CC="$(pwd)/devtools/bin/linux/ccache gcc-9"
-			# shellcheck disable=SC2155
-			export CXX="$(pwd)/devtools/bin/linux/ccache g++-9"
 		;;
 		"-l")
 			# shellcheck disable=SC2155
@@ -85,7 +79,7 @@ check_and_at_build() {
 		if [[ -n ${CHROOT_NAME} ]]; then
 			schroot --chroot "${CHROOT_NAME}" -- /bin/bash << EOF
 				export PATH=/bin:/usr/bin
-				export CC=$CC
+				export CC=$CC  # TODO(melvyn2) fix this
 				export CXX=$CXX
 				aclocal
 				automake --add-missing
@@ -141,8 +135,7 @@ check_and_make ./thirdparty/libpng-1.5.2 ./lib/public/linux32/libpng.a "-f scrip
 
 # shellcheck disable=SC2086   # we want arguments to be split
 devtools/bin/vpc_linux /define:WORKSHOP_IMPORT_DISABLE /define:SIXENSE_DISABLE /define:NO_X360_XDK \
-				/define:RAD_TELEMETRY_DISABLED /define:DISABLE_ETW /retail /tf ${VPC_FLAGS} +game /mksln games
-
+				/define:RAD_TELEMETRY_DISABLED /define:DISABLE_ETW /retail /tf ${VPC_FLAGS} +game +dedicated /mksln games
 
 CFLAGS="${CF_SUPPRESSION}" CXXFLAGS="${CF_SUPPRESSION}" make ${MAKE_SRT_FLAGS} MAKE_VERBOSE="${MAKE_VERBOSE}" ${MAKE_CFG} \
 		MAKE_JOBS="$CORES" -f games.mak "$@"

@@ -40,6 +40,7 @@ link_dir tf/scripts
 
 link_glob bin ''
 link_glob tf '.vpk'
+link_glob tf '.cache'  # Issue #408
 
 copy tf/cfg
 copy tf/gamestate.txt
