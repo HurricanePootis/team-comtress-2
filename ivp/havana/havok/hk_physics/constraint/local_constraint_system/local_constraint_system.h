@@ -27,20 +27,16 @@ public:
 
     void write_to_blueprint( hk_Local_Constraint_System_BP * );
 
-	inline void set_error_ticks(int error_ticks) { m_minErrorTicks = error_ticks; }
-	inline void set_error_tolerance(float tolerance) { m_errorTolerance = tolerance; }
-	inline bool has_error() const { return m_errorCount > m_errorTolerance; }
-	inline void clear_error()
-	{
-	  m_errorCount = 0;
-	  m_errorThisTick = 0;
-	}
+	inline void set_error_ticks(int error_ticks);
+	inline void set_error_tolerance(float tolerance);
+	inline bool has_error() const;
+	inline void clear_error();
 
     void solve_penetration( IVP_Real_Object * pivp0, IVP_Real_Object * pivp1 );
 
-    inline void set_client_data( void *client_data ) { m_client_data = client_data; }
-	inline void* get_client_data() const { return m_client_data; }
-    inline bool is_active() { return m_is_active; }
+	inline void set_client_data(void* client_data);
+	inline void* get_client_data() const;
+	inline bool is_active();
 
 	virtual const char* get_controller_name()
 	{
@@ -100,7 +96,7 @@ protected:
     void * m_client_data;
 };
 
-//#include <hk_physics/constraint/local_constraint_system/local_constraint_system.inl>
+#include <hk_physics/constraint/local_constraint_system/local_constraint_system.inl>
 
 #endif /* HK_PHYSICS_LOCAL_CONSTRAINT_SYSTEM_H */
 
