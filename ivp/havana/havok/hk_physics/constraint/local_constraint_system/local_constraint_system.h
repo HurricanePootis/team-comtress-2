@@ -27,24 +27,27 @@ public:
 
     void write_to_blueprint( hk_Local_Constraint_System_BP * );
 
-    void set_error_ticks( int );
-    void set_error_tolerance( float );
-    bool has_error();
-    void clear_error();
+	inline void set_error_ticks(int error_ticks) { m_minErrorTicks = error_ticks; }
+	inline void set_error_tolerance(float tolerance) { m_errorTolerance = tolerance; }
+	inline bool has_error() const { return m_errorCount > m_errorTolerance; }
+	inline void clear_error()
+	{
+	  m_errorCount = 0;
+	  m_errorThisTick = 0;
+	}
 
     void solve_penetration( IVP_Real_Object * pivp0, IVP_Real_Object * pivp1 );
 
     inline void set_client_data( void *client_data ) { m_client_data = client_data; }
-
-		inline void* get_client_data() const { return m_client_data; }
+	inline void* get_client_data() const { return m_client_data; }
     inline bool is_active() { return m_is_active; }
 
-		virtual const char* get_constraint_type()
-		{
-			return "sys:constraint";
-		}
+	virtual const char* get_constraint_type()
+	{
+	  return "sys:constraint";
+	}
 
-		void get_constraints_in_system(hk_Array<hk_Constraint*>& constraints_out);
+	void get_constraints_in_system(hk_Array<hk_Constraint*>& constraints_out);
 //	inline hk_Environment *get_environment() const;
 public:	// internal
 	virtual void entity_deletion_event(hk_Entity *);
