@@ -178,6 +178,11 @@ hk_real hk_Local_Constraint_System::get_epsilon()
 	return 0.2f;
 }
 
+void hk_Local_Constraint_System::report_square_error(float errSq)
+{
+  m_errorThisTick = ((m_errorTolerance * m_errorTolerance) < errSq);
+}
+
 void hk_Local_Constraint_System::apply_effector_PSI(	hk_PSI_Info& pi, hk_Array<hk_Entity*>* )
 {
 	const int buffer_size = 150000;

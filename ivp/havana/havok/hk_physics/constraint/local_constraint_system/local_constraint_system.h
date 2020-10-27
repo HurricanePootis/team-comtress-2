@@ -68,6 +68,8 @@ public:	// internal
 
 	hk_real get_epsilon();
 	//: get the epsilon which defines the softness of the constraint
+
+	void report_square_error(float errSq);
 protected:
 	friend class hk_Constraint;
 	void add_constraint( hk_Constraint *, int storage_size);
