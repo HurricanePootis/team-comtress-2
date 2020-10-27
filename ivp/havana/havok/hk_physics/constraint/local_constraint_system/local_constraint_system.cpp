@@ -19,6 +19,10 @@ hk_Local_Constraint_System::hk_Local_Constraint_System( hk_Environment *env, hk_
 {
 	m_environment = env;
 	m_size_of_all_vmq_storages = 0;
+
+    // pull in number of iterations and error tolerance from blueprint
+    m_n_iterations = bp->m_n_iterations;
+    m_errorTolerance = bp->m_errorTolerance;
 }
 
 hk_Local_Constraint_System::~hk_Local_Constraint_System()
