@@ -74,30 +74,24 @@ protected:
 
 	void recalc_storage_size();
 
-	// Commented out in favor of those below
-
-//	int							m_n_iterations;
-//	bool                        m_active;
-//	int							m_size_of_all_vmq_storages;
-//	hk_Array<hk_Constraint *> 	m_constraints;
-//	hk_Array<hk_Rigid_Body*>	m_bodies;
-
-
-	// Extracted from DWARF using ghidra:
-//    struct hk_Link_EF super_hk_Link_EF; // parent class
+protected:
     int m_n_iterations;
     int m_size_of_all_vmq_storages;
-    struct hk_Array<hk_Constraint*> m_constraints;
-    struct hk_Array<hk_Rigid_Body*> m_bodies;
+
+    hk_Array<hk_Constraint*> m_constraints;
+    hk_Array<hk_Rigid_Body*> m_bodies;
+
     int m_minErrorTicks;
     int m_errorCount;
     int m_penetrationCount;
-    struct penetratepair_t m_penetrationPairs[4];
+
+    penetratepair_t m_penetrationPairs[4];
+
     float m_errorTolerance;
     bool m_is_active;
     bool m_errorThisTick;
     bool m_needsSort;
-//    undefined field_0x4b; // probably dwarf artifact
+
     void * m_client_data;
 };
 
