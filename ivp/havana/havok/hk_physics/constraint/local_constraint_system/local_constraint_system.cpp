@@ -124,30 +124,6 @@ void hk_Local_Constraint_System::write_to_blueprint( hk_Local_Constraint_System_
     bpOut->m_active = m_is_active;
 }
 
-// todo(melvyn2) the 4 following funcs couldn't be found in the static archives, and I guessed how they worked
-// they're probably in vphysics.so, but I have no idea how I'd locate them (no dwarf info)
-// they almost certainly won't work as they should
-void hk_Local_Constraint_System::set_error_ticks( int error_ticks )
-{
-    m_minErrorTicks = error_ticks;
-}
-
-void hk_Local_Constraint_System::set_error_tolerance(float tolerance)
-{
-    m_errorTolerance = tolerance;
-}
-
-bool hk_Local_Constraint_System::has_error()
-{
-    return m_errorCount > m_errorTolerance;
-}
-
-void hk_Local_Constraint_System::clear_error()
-{
-    m_errorCount =  0;
-    m_errorThisTick = 0;
-}
-
 // fixme(melvyn2) I literally copy-pasted decompiler output, FIX THIS
 void hk_Local_Constraint_System::solve_penetration( IVP_Real_Object * pivp0, IVP_Real_Object * pivp1 )
 {
