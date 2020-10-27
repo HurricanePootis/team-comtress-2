@@ -139,105 +139,27 @@ void hk_Local_Constraint_System::write_to_blueprint( hk_Local_Constraint_System_
 }
 
 // fixme(melvyn2) I literally copy-pasted decompiler output, FIX THIS
-void hk_Local_Constraint_System::solve_penetration( IVP_Real_Object * pivp0, IVP_Real_Object * pivp1 )
+void hk_Local_Constraint_System::solve_penetration(IVP_Real_Object* pivp0, IVP_Real_Object* pivp1)
 {
-    int penCount;
-    IVP_Real_Object *pIVar1;
-    short num_elems;
-    int iVar2;
-    short sVar3;
+  IVP_Real_Object* curBody;
 
-    penCount = this->m_penetrationCount;
-    if (penCount < 4) {
-        unsigned int _num_elems = (unsigned int)m_bodies.length() - 1;   // todo(melvyn2) check if this is even needed
-        num_elems = (short)m_bodies.length() - 1;
-        if (_num_elems == -1) {  // todo(melvyn2) this doesn't even make sense, _num_elems is uint
-            num_elems = -1;
-            *(short *) (m_environment + penCount + 0xc) = 0xffff;
-        }
-        else {
-            pIVar1 = m_bodies.get_element(_num_elems);
-            iVar2 = _num_elems;
-            sVar3 = num_elems;
-            while (pivp0 != pIVar1) {
-                iVar2 = iVar2 + -1;
-                sVar3 = (short)iVar2;
-                if (iVar2 == -1) {
-                    sVar3 = -1;
-                    break;
-                }
-                pIVar1 = m_bodies.get_element(iVar2);
-            }
-            *(short *)(m_environment + penCount + 0xc) = sVar3;
-            pIVar1 = m_bodies.get_element(_num_elems);
-            while (pivp1 != pIVar1) {
-                _num_elems = _num_elems + -1;
-                num_elems = (short)_num_elems;
-                if (_num_elems == -1) break;
-                pIVar1 = m_bodies.get_element(_num_elems);
-            }
-        }
-        sVar3 = *(short *)(m_environment + penCount + 0xc);
-        *(short *)((int)m_environment + (penCount + 0xc) * 4 + 2) = num_elems;
-        if ((-1 < sVar3) && (-1 < num_elems)) {
-            this->m_penetrationCount = penCount + 1;
-        }
-    }
+  if (m_penetrationCount >= 4)
     return;
-}
 
-/* this is the ghidra output, for reference:
-void __thiscall solve_penetration(hk_Local_Constraint_System *this,IVP_Real_Object *pipv0,IVP_Real_Object *pipv1)
-{
-  int penCount;
-  char *bodiesArray;
-  IVP_Real_Object *pIVar1;
-  short num_elems;
-  int iVar2;
-  short sVar3;
+  for (hk_Array<hk_Entity*>::iterator i = m_bodies.start();
+    m_bodies.is_valid(i);
+    i = m_bodies.next(i))
+  {
+    curBody = (*(IVP_Real_Object**)(m_bodies.get_element(i)));
 
-  penCount = this->m_penetrationCount;
-  if (penCount < 4) {
-    _num_elems = (uint)(this->m_bodies).super_hk_Array_Base.m_n_elems - 1;
-    num_elems = (short)_num_elems;
-    if (_num_elems == -1) {
-      num_elems = -1;
-      *(undefined2 *)(&(this->super_hk_Link_EF).m_environment + penCount + 0xc) = 0xffff;
+    if (curBody == pivp0 || curBody == pivp1)
+    {
+      // bodies are penetrating
+      //get_environment().
     }
-    else {
-      bodiesArray = (this->m_bodies).super_hk_Array_Base.m_elems;
-      pIVar1 = *(IVP_Real_Object **)(bodiesArray + _num_elems * 4);
-      iVar2 = _num_elems;
-      sVar3 = num_elems;
-      while (pipv0 != pIVar1) {
-        iVar2 = iVar2 + -1;
-        sVar3 = (short)iVar2;
-        if (iVar2 == -1) {
-          sVar3 = -1;
-          break;
-        }
-        pIVar1 = *(IVP_Real_Object **)(bodiesArray + iVar2 * 4);
-      }
-      *(short *)(&(this->super_hk_Link_EF).m_environment + penCount + 0xc) = sVar3;
-      pIVar1 = *(IVP_Real_Object **)(bodiesArray + _num_elems * 4);
-      while (pipv1 != pIVar1) {
-        _num_elems = _num_elems + -1;
-        num_elems = (short)_num_elems;
-        if (_num_elems == -1) break;
-        pIVar1 = *(IVP_Real_Object **)(bodiesArray + _num_elems * 4);
-      }
-    }
-    sVar3 = *(short *)(&(this->super_hk_Link_EF).m_environment + penCount + 0xc);
-    *(short *)((int)&(this->super_hk_Link_EF).m_environment + (penCount + 0xc) * 4 + 2) = num_elems;
-    if ((-1 < sVar3) && (-1 < num_elems)) {
-      this->m_penetrationCount = penCount + 1;
-    }
+    HK_BREAK; // WIP(crack). step through rigid bodies seeing if they are penetrating
   }
-  return;
 }
- */
-
-
 
 void hk_Local_Constraint_System::get_effected_entities(hk_Array<hk_Entity*> &ent_out)
 {
