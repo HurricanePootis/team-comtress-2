@@ -5,7 +5,17 @@
 #include <hk_physics/constraint/local_constraint_system/local_constraint_system.h>
 
 hk_Local_Constraint_System::hk_Local_Constraint_System( hk_Environment *env, hk_Local_Constraint_System_BP* bp )
-	: hk_Link_EF(env)
+  : hk_Link_EF(env)
+  , m_n_iterations(0)
+  , m_size_of_all_vmq_storages(0)
+  , m_minErrorTicks(0)
+  , m_errorCount(0)
+  , m_penetrationCount(0)
+  , m_errorTolerance(0)
+  , m_is_active(0)
+  , m_errorThisTick(0)
+  , m_needsSort(0)
+  , m_client_data(0)
 {
 	m_environment = env;
 	m_size_of_all_vmq_storages = 0;
