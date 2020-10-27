@@ -101,14 +101,12 @@ void hk_Local_Constraint_System::add_constraint( hk_Constraint * constraint, int
 
 void hk_Local_Constraint_System::activate()
 {
-	if ( !m_is_active && m_bodies.length() ){
-	    // Ghidra output:     _ZN22IVP_Controller_Manager34announce_controller_to_environmentEP24IVP_Controller_Dependent
-        //              (*(IVP_Controller_Dependent **)&((this->super_hk_Link_EF).m_environment)->field_0x94);
-        // Simplified: IVP_Controller_Manager.announce_controller_to_environment( &(this->m_environment) + 0x94) ;
-        // todo(melvyn2) make sure this does what it's supposed to, doesn't make much sense
-		m_environment->get_controller_manager()->announce_controller_to_environment(this);
-		this->m_is_active = true;
-	}
+  if (!m_is_active && m_bodies.length())
+  {
+	// notify enivronment observer this controller is active.
+	m_environment->get_controller_manager()->announce_controller_to_environment(this);
+	this->m_is_active = true;
+  }
 }
 
 void hk_Local_Constraint_System::deactivate()
