@@ -136,27 +136,27 @@ void hk_Local_Constraint_System::write_to_blueprint( hk_Local_Constraint_System_
     bpOut->m_active = m_is_active;
 }
 
-// fixme(melvyn2) I literally copy-pasted decompiler output, FIX THIS
 void hk_Local_Constraint_System::solve_penetration(IVP_Real_Object* pivp0, IVP_Real_Object* pivp1)
 {
-  IVP_Real_Object* curBody;
+	if (m_penetrationCount >= 4)
+		return;
 
-  if (m_penetrationCount >= 4)
-    return;
+	for (hk_Array<hk_Entity*>::iterator i = m_bodies.start();
+		(m_bodies.is_valid(i) && pivp0 != m_bodies.get_element(i));
+		i = m_bodies.next(i))
+	{
+		m_penetrationPairs[m_penetrationCount].obj0 = i;
+	}
 
-  for (hk_Array<hk_Entity*>::iterator i = m_bodies.start();
-    m_bodies.is_valid(i);
-    i = m_bodies.next(i))
-  {
-    curBody = (*(IVP_Real_Object**)(m_bodies.get_element(i)));
+	for (hk_Array<hk_Entity*>::iterator i = m_bodies.start();
+		(m_bodies.is_valid(i) && pivp1 != m_bodies.get_element(i));
+		i = m_bodies.next(i))
+	{
+		m_penetrationPairs[m_penetrationCount].obj1 = i;
+	}
 
-    if (curBody == pivp0 || curBody == pivp1)
-    {
-      // bodies are penetrating
-      //get_environment().
-    }
-    HK_BREAK; // WIP(crack). step through rigid bodies seeing if they are penetrating
-  }
+	if (m_penetrationPairs[m_penetrationCount].obj0 > -1 && m_penetrationPairs[m_penetrationCount].obj1 > -1)
+		m_penetrationCount++;
 }
 
 void hk_Local_Constraint_System::get_effected_entities(hk_Array<hk_Entity*> &ent_out)
