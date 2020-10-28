@@ -216,3 +216,16 @@ void hk_Local_Constraint_System::apply_effector_PSI(	hk_PSI_Info& pi, hk_Array<h
 	}
 }
 
+const char* hk_Local_Constraint_System::get_controller_name(void)
+{
+    return "sys:constraint";
+}
+
+hk_effector_priority hk_Local_Constraint_System::get_effector_priority(void)
+{
+    return HK_PRIORITY_LOCAL_CONSTRAINT_SYSTEM;
+}
+
+void hk_Local_Constraint_System::apply_effector_collision(hk_PSI_Info&, hk_Array<hk_Entity*>*)
+{
+}

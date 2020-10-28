@@ -18,28 +18,28 @@ public:
     /// </summary>
     /// <param name="environment"></param>
     /// <param name="blueprint"></param>
-    hk_Local_Constraint_System( hk_Environment *, hk_Local_Constraint_System_BP* );
+    hk_Local_Constraint_System(hk_Environment*, hk_Local_Constraint_System_BP*);
     /// <summary>
     /// Activates the constraint system
     /// </summary>
-    void activate();
+    void activate(void);
     /// <summary>
     /// Deactivates the constraint system
     /// </summary>
-    void deactivate();
+    void deactivate(void);
     /// <summary>
     /// Deactivates the constraint silently
     /// </summary>
-    void deactivate_silently();
+    void deactivate_silently(void);
     /// <summary>
     /// 
     /// </summary>
-    virtual ~hk_Local_Constraint_System();
+    virtual ~hk_Local_Constraint_System(void);
     /// <summary>
     /// Writes the current state of the constraint system
     /// </summary>
     /// <param name="pBluePrint">Blueprint to write the current constraint system state to</param>
-    void write_to_blueprint( hk_Local_Constraint_System_BP * );
+    void write_to_blueprint(hk_Local_Constraint_System_BP*);
     /// <summary>
     /// 
     /// </summary>
@@ -54,11 +54,11 @@ public:
     /// 
     /// </summary>
     /// <returns>true if constraint system is in an errored state</returns>
-    inline bool has_error() const;
+    inline bool has_error(void) const;
     /// <summary>
     /// 
     /// </summary>
-    inline void clear_error();
+    inline void clear_error(void);
     /// <summary>
     /// !INCOMPLETE! (crack) - I assume this is suppose to iterate against the current constrained rigid bodies, then
     /// send the possible collisions to the simunit to solve. The simunit will then respond back to the appropriate
@@ -66,7 +66,7 @@ public:
     /// </summary>
     /// <param name="pObject0"></param>
     /// <param name="pObject1"></param>
-    void solve_penetration( IVP_Real_Object * pObject0, IVP_Real_Object * pObject1 );
+    void solve_penetration(IVP_Real_Object* pObject0, IVP_Real_Object* pObject1);
     /// <summary>
     /// 
     /// </summary>
@@ -76,20 +76,17 @@ public:
     /// 
     /// </summary>
     /// <returns></returns>
-    inline void* get_client_data() const;
+    inline void* get_client_data(void) const;
     /// <summary>
     /// 
     /// </summary>
     /// <returns>true if the constraint system is active</returns>
-    inline bool is_active();
+    inline bool is_active(void);
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    virtual const char* get_controller_name() // TODO(crack): move to inherited section - inherited from IVP_Controller
-    {
-      return "sys:constraint";
-    }
+    virtual const char* get_controller_name(void);
     /// <summary>
     /// 
     /// </summary>
@@ -99,20 +96,17 @@ public:
     /// !UNIMPLEMENTED!
     /// </summary>
     /// <param name="pEnt"></param>
-    virtual void entity_deletion_event(hk_Entity *); // TODO(crack): move to inherited section - inherited from IVP_Controller
+    virtual void entity_deletion_event(hk_Entity*);
     /// <summary>
     /// 
     /// </summary>
     /// <param name=""></param>
-    void constraint_deletion_event( hk_Constraint * );
+    void constraint_deletion_event(hk_Constraint*);
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    virtual hk_effector_priority get_effector_priority()
-    {
-        return HK_PRIORITY_LOCAL_CONSTRAINT_SYSTEM;
-    }
+    virtual hk_effector_priority get_effector_priority(void);
     /// <summary>
     /// 
     /// </summary>
@@ -123,18 +117,18 @@ public:
     /// </summary>
     /// <param name="">pi</param>
     /// <param name="">ent_list</param>
-    void apply_effector_PSI(    hk_PSI_Info&, hk_Array<hk_Entity*>* );
+    void apply_effector_PSI(hk_PSI_Info&, hk_Array<hk_Entity*>*);
     /// <summary>
     /// 
     /// </summary>
     /// <param name="pi"></param>
     /// <param name="ent_list"></param>
-    void apply_effector_collision(    hk_PSI_Info&,    hk_Array<hk_Entity*>* ){ ;}
+    void apply_effector_collision(hk_PSI_Info&, hk_Array<hk_Entity*>*);
     /// <summary>
     /// Get the epsilon which defines the softness of the constraint
     /// </summary>
     /// <returns></returns>
-    hk_real get_epsilon();
+    hk_real get_epsilon(void);
     /// <summary>
     /// 
     /// </summary>
@@ -151,11 +145,11 @@ protected:
     /// <param name=""></param>
     /// <param name="storage_size"></param>
     /// <remarks>if the constraint is deactivated, than adding constraints is much faster</remarks>
-    void add_constraint( hk_Constraint *, int storage_size);
+    void add_constraint(hk_Constraint*, int storage_size);
     /// <summary>
     /// 
     /// </summary>
-    void recalc_storage_size();
+    void recalc_storage_size(void);
 
 protected:
     int m_n_iterations;
